@@ -1,8 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+it('renders', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
 });
+
+it('snapshot matches', () => {
+  const { asFragment } = render(
+    <App />
+  );
+  expect(asFragment).toMatchSnapshot();
+});
+
+it('should render an empty todoList and NewTodoForm', () => {
+    render(<App />);
+
+    expect(screen.getByLabelText('Todo:')).toBeInTheDocument();
+    expect(screen.getByText('Add')).toBeInTheDocument();
+  });
